@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="wamoleModelStoreContainer" CdmEntityContainer="wamoleEntities">
+    <EntitySetMapping Name="games">
+      <EntityTypeMapping TypeName="wamoleModel.game">
+        <MappingFragment StoreEntitySet="game">
+          <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+          <ScalarProperty Name="Game_Name" ColumnName="Game_Name" />
+          <ScalarProperty Name="Game_Type" ColumnName="Game_Type" />
+          <ScalarProperty Name="Game_TTL" ColumnName="Game_TTL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="game_session">
+      <EntityTypeMapping TypeName="wamoleModel.game_session">
+        <MappingFragment StoreEntitySet="game_session">
+          <ScalarProperty Name="Game_Session_ID" ColumnName="Game_Session_ID" />
+          <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+          <ScalarProperty Name="Game_Start_Time" ColumnName="Game_Start_Time" />
+          <ScalarProperty Name="Game_End_Time" ColumnName="Game_End_Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="npcs">
+      <EntityTypeMapping TypeName="wamoleModel.npc">
+        <MappingFragment StoreEntitySet="npc">
+          <ScalarProperty Name="NPC_ID" ColumnName="NPC_ID" />
+          <ScalarProperty Name="NPC_Name" ColumnName="NPC_Name" />
+          <ScalarProperty Name="NPC_Type" ColumnName="NPC_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="npc_game_session">
+      <EntityTypeMapping TypeName="wamoleModel.npc_game_session">
+        <MappingFragment StoreEntitySet="npc_game_session">
+          <ScalarProperty Name="NPC_Game_Session_ID" ColumnName="NPC_Game_Session_ID" />
+          <ScalarProperty Name="Game_Session_ID" ColumnName="Game_Session_ID" />
+          <ScalarProperty Name="NPC_ID" ColumnName="NPC_ID" />
+          <ScalarProperty Name="NPC_X" ColumnName="NPC_X" />
+          <ScalarProperty Name="NPC_Y" ColumnName="NPC_Y" />
+          <ScalarProperty Name="NPC_Z" ColumnName="NPC_Z" />
+          <ScalarProperty Name="NPC_TTL" ColumnName="NPC_TTL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="players">
+      <EntityTypeMapping TypeName="wamoleModel.player">
+        <MappingFragment StoreEntitySet="player">
+          <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
+          <ScalarProperty Name="Player_Name" ColumnName="Player_Name" />
+          <ScalarProperty Name="Player_Password" ColumnName="Player_Password" />
+          <ScalarProperty Name="Player_Login_Attempts" ColumnName="Player_Login_Attempts" />
+          <ScalarProperty Name="Player_Locked" ColumnName="Player_Locked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="player_game_session">
+      <EntityTypeMapping TypeName="wamoleModel.player_game_session">
+        <MappingFragment StoreEntitySet="player_game_session">
+          <ScalarProperty Name="Game_Session_ID" ColumnName="Game_Session_ID" />
+          <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
+          <ScalarProperty Name="Player_X" ColumnName="Player_X" />
+          <ScalarProperty Name="Player_Y" ColumnName="Player_Y" />
+          <ScalarProperty Name="Player_Hits" ColumnName="Player_Hits" />
+          <ScalarProperty Name="Player_Misses" ColumnName="Player_Misses" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="player_score">
+      <EntityTypeMapping TypeName="wamoleModel.player_score">
+        <MappingFragment StoreEntitySet="player_score">
+          <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
+          <ScalarProperty Name="Player_Hits" ColumnName="Player_Hits" />
+          <ScalarProperty Name="Player_Misses" ColumnName="Player_Misses" />
+          <ScalarProperty Name="Player_Wins" ColumnName="Player_Wins" />
+          <ScalarProperty Name="Player_Losses" ColumnName="Player_Losses" />
+          <ScalarProperty Name="Player_Ties" ColumnName="Player_Ties" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="player_session">
+      <EntityTypeMapping TypeName="wamoleModel.player_session">
+        <MappingFragment StoreEntitySet="player_session">
+          <ScalarProperty Name="Player_ID" ColumnName="Player_ID" />
+          <ScalarProperty Name="Player_Start_Time" ColumnName="Player_Start_Time" />
+          <ScalarProperty Name="Player_End_Time" ColumnName="Player_End_Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="PlayerLogin" FunctionName="wamoleModel.Store.PlayerLogin" />
+    <FunctionImportMapping FunctionImportName="PlayerLogout" FunctionName="wamoleModel.Store.PlayerLogout" />
+    <FunctionImportMapping FunctionImportName="CreatePlayer" FunctionName="wamoleModel.Store.CreatePlayer" />
+    <FunctionImportMapping FunctionImportName="RemovePlayer" FunctionName="wamoleModel.Store.RemovePlayer" />
+    <FunctionImportMapping FunctionImportName="UpdatePlayer" FunctionName="wamoleModel.Store.UpdatePlayer" />
+    <FunctionImportMapping FunctionImportName="LockPlayer" FunctionName="wamoleModel.Store.LockPlayer" />
+    <EntitySetMapping Name="player_challenge">
+      <EntityTypeMapping TypeName="wamoleModel.player_challenge">
+        <MappingFragment StoreEntitySet="player_challenge">
+          <ScalarProperty Name="Challenged_Time" ColumnName="Challenged_Time" />
+          <ScalarProperty Name="Player2_ID" ColumnName="Player2_ID" />
+          <ScalarProperty Name="Player1_ID" ColumnName="Player1_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ChallengePlayer" FunctionName="wamoleModel.Store.ChallengePlayer" />
+  </EntityContainerMapping>
+</Mapping>

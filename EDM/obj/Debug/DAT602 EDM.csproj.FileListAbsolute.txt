@@ -1,0 +1,24 @@
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.exe.config
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.exe
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.pdb
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\EntityFramework.dll
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\EntityFramework.xml
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.exe
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.pdb
+C:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.csprojResolveAssemblyReference.cache
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.exe.config
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.exe
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.pdb
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.exe
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.pdb
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\EntityFramework.dll
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\EntityFramework.xml
+C:\Users\Benjamin\Documents\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.csprojResolveAssemblyReference.cache
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.exe.config
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.exe
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.pdb
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.exe
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\DAT602 EDM.pdb
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\EntityFramework.dll
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\bin\Debug\EntityFramework.xml
+D:\Users\benjamin-rea\Dropbox\Work\.DAT602\Project\app\DAT602 EDM\obj\Debug\DAT602 EDM.csprojResolveAssemblyReference.cache

@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wamoleModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="game">
+    <Key>
+      <PropertyRef Name="Game_ID" />
+    </Key>
+    <Property Name="Game_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Game_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Game_Type" Type="int" Nullable="false" />
+    <Property Name="Game_TTL" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="game_session">
+    <Key>
+      <PropertyRef Name="Game_Session_ID" />
+    </Key>
+    <Property Name="Game_Session_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Game_ID" Type="int" Nullable="false" />
+    <Property Name="Game_Start_Time" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Game_End_Time" Type="datetime" Precision="0" />
+  </EntityType>
+  <EntityType Name="npc">
+    <Key>
+      <PropertyRef Name="NPC_ID" />
+    </Key>
+    <Property Name="NPC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NPC_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NPC_Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="npc_game_session">
+    <Key>
+      <PropertyRef Name="NPC_Game_Session_ID" />
+    </Key>
+    <Property Name="NPC_Game_Session_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Game_Session_ID" Type="int" Nullable="false" />
+    <Property Name="NPC_ID" Type="int" Nullable="false" />
+    <Property Name="NPC_X" Type="int" Nullable="false" />
+    <Property Name="NPC_Y" Type="int" Nullable="false" />
+    <Property Name="NPC_Z" Type="int" Nullable="false" />
+    <Property Name="NPC_TTL" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="player">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Player_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Player_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Player_Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Player_Login_Attempts" Type="int" Nullable="false" />
+    <Property Name="Player_Locked" Type="bool" Nullable="false" />
+  </EntityType>
+  <EntityType Name="player_game_session">
+    <Key>
+      <PropertyRef Name="Game_Session_ID" />
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Game_Session_ID" Type="int" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Player_X" Type="int" Nullable="false" />
+    <Property Name="Player_Y" Type="int" Nullable="false" />
+    <Property Name="Player_Hits" Type="int" Nullable="false" />
+    <Property Name="Player_Misses" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="player_score">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Player_Hits" Type="int" />
+    <Property Name="Player_Misses" Type="int" />
+    <Property Name="Player_Wins" Type="int" />
+    <Property Name="Player_Losses" Type="int" />
+    <Property Name="Player_Ties" Type="int" />
+  </EntityType>
+  <EntityType Name="player_session">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="Player_Start_Time" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Player_End_Time" Type="datetime" Precision="0" />
+  </EntityType>
+  <Association Name="game_session_ibfk_1">
+    <End Role="game" Type="Self.game" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="game_session" Type="Self.game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="Game_ID" />
+      </Principal>
+      <Dependent Role="game_session">
+        <PropertyRef Name="Game_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="npc_game_session_ibfk_1">
+    <End Role="game_session" Type="Self.game_session" Multiplicity="1" />
+    <End Role="npc_game_session" Type="Self.npc_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Principal>
+      <Dependent Role="npc_game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="npc_game_session_ibfk_2">
+    <End Role="npc" Type="Self.npc" Multiplicity="1" />
+    <End Role="npc_game_session" Type="Self.npc_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="npc">
+        <PropertyRef Name="NPC_ID" />
+      </Principal>
+      <Dependent Role="npc_game_session">
+        <PropertyRef Name="NPC_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_game_session_ibfk_1">
+    <End Role="game_session" Type="Self.game_session" Multiplicity="1" />
+    <End Role="player_game_session" Type="Self.player_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Principal>
+      <Dependent Role="player_game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_game_session_ibfk_2">
+    <End Role="player" Type="Self.player" Multiplicity="1" />
+    <End Role="player_game_session" Type="Self.player_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="Player_ID" />
+      </Principal>
+      <Dependent Role="player_game_session">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_score_ibfk_1">
+    <End Role="player" Type="Self.player" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="player_score" Type="Self.player_score" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="Player_ID" />
+      </Principal>
+      <Dependent Role="player_score">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_session_ibfk_1">
+    <End Role="player" Type="Self.player" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="player_session" Type="Self.player_session" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="Player_ID" />
+      </Principal>
+      <Dependent Role="player_session">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CreateGameSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameID" Type="int" Mode="In" />
+    <Parameter Name="prGameName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CreatePlayer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerName" Type="varchar" Mode="In" />
+    <Parameter Name="prPlayerPassword" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EndGameSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameSessionID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GameLoop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole" />
+  <Function Name="JoinGameSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameSessionID" Type="int" Mode="In" />
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+    <Parameter Name="prResult" Type="tinyint" Mode="Out" />
+  </Function>
+  <Function Name="KillGame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole" ReturnType="tinyint">
+    <Parameter Name="GameSessionID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="KillNPC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prNPCGameSessionID" Type="int" Mode="In" />
+    <Parameter Name="prResult" Type="tinyint" Mode="Out" />
+  </Function>
+  <Function Name="LeaveGameSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameSessionID" Type="int" Mode="In" />
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LockPlayer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PlayerLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerName" Type="varchar" Mode="In" />
+    <Parameter Name="prPlayerPassword" Type="varchar" Mode="In" />
+    <Parameter Name="prResult" Type="int" Mode="Out" />
+  </Function>
+  <Function Name="PlayerLogout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemovePlayer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RemoveScores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SpawnNPC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameSessionID" Type="int" Mode="In" />
+    <Parameter Name="prNPCID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UnlockPlayer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateGameSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameSessionID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdatePlayer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+    <Parameter Name="prPlayerName" Type="varchar" Mode="In" />
+    <Parameter Name="prPlayerPassword" Type="varchar" Mode="In" />
+    <Parameter Name="prPlayerLoginAttempts" Type="int" Mode="In" />
+    <Parameter Name="prPlayerLocked" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="UpdatePlayerName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+    <Parameter Name="prField" Type="char" Mode="In" />
+    <Parameter Name="prData" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdatePlayerPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+    <Parameter Name="prField" Type="char" Mode="In" />
+    <Parameter Name="prData" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateScores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="wamole">
+    <Parameter Name="prGameSessionID" Type="int" Mode="In" />
+    <Parameter Name="prPlayerID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="wamoleModelStoreContainer">
+    <EntitySet Name="game" EntityType="Self.game" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="game_session" EntityType="Self.game_session" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="npc" EntityType="Self.npc" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="npc_game_session" EntityType="Self.npc_game_session" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="player" EntityType="Self.player" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="player_game_session" EntityType="Self.player_game_session" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="player_score" EntityType="Self.player_score" Schema="wamole" store:Type="Tables" />
+    <EntitySet Name="player_session" EntityType="Self.player_session" Schema="wamole" store:Type="Tables" />
+    <AssociationSet Name="game_session_ibfk_1" Association="Self.game_session_ibfk_1">
+      <End Role="game" EntitySet="game" />
+      <End Role="game_session" EntitySet="game_session" />
+    </AssociationSet>
+    <AssociationSet Name="npc_game_session_ibfk_1" Association="Self.npc_game_session_ibfk_1">
+      <End Role="game_session" EntitySet="game_session" />
+      <End Role="npc_game_session" EntitySet="npc_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="npc_game_session_ibfk_2" Association="Self.npc_game_session_ibfk_2">
+      <End Role="npc" EntitySet="npc" />
+      <End Role="npc_game_session" EntitySet="npc_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="player_game_session_ibfk_1" Association="Self.player_game_session_ibfk_1">
+      <End Role="game_session" EntitySet="game_session" />
+      <End Role="player_game_session" EntitySet="player_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="player_game_session_ibfk_2" Association="Self.player_game_session_ibfk_2">
+      <End Role="player" EntitySet="player" />
+      <End Role="player_game_session" EntitySet="player_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="player_score_ibfk_1" Association="Self.player_score_ibfk_1">
+      <End Role="player" EntitySet="player" />
+      <End Role="player_score" EntitySet="player_score" />
+    </AssociationSet>
+    <AssociationSet Name="player_session_ibfk_1" Association="Self.player_session_ibfk_1">
+      <End Role="player" EntitySet="player" />
+      <End Role="player_session" EntitySet="player_session" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c587f155ff941a4bd07196f721a498a" Name="Diagram1" >
+        <EntityTypeShape EntityType="wamoleModel.game" Width="1.5" PointX="6.75" PointY="0.5" />
+        <EntityTypeShape EntityType="wamoleModel.game_session" Width="1.5" PointX="6.75" PointY="3.625" />
+        <EntityTypeShape EntityType="wamoleModel.npc" Width="1.5" PointX="9.125" PointY="0.5" />
+        <EntityTypeShape EntityType="wamoleModel.npc_game_session" Width="1.5" PointX="9.125" PointY="3.625" />
+        <EntityTypeShape EntityType="wamoleModel.player" Width="1.5" PointX="4.125" PointY="0.5" />
+        <EntityTypeShape EntityType="wamoleModel.player_game_session" Width="1.5" PointX="4.125" PointY="3.625" />
+        <EntityTypeShape EntityType="wamoleModel.player_score" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="wamoleModel.player_session" Width="1.5" PointX="0.75" PointY="3.5" />
+        <AssociationConnector Association="wamoleModel.game_session_ibfk_1" />
+        <AssociationConnector Association="wamoleModel.npc_game_session_ibfk_1" />
+        <AssociationConnector Association="wamoleModel.player_game_session_ibfk_1" />
+        <AssociationConnector Association="wamoleModel.npc_game_session_ibfk_2" />
+        <AssociationConnector Association="wamoleModel.player_game_session_ibfk_2" />
+        <AssociationConnector Association="wamoleModel.player_score_ibfk_1" />
+        <AssociationConnector Association="wamoleModel.player_session_ibfk_1" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.3870396618163037" PointY="3.0571907552083326" />
+          <ConnectorPoint PointX="4.3870396618163037" PointY="3.375" />
+          <ConnectorPoint PointX="3.375" PointY="3.375" />
+          <ConnectorPoint PointX="3.375" PointY="4.3939925130208337" />
+          <ConnectorPoint PointX="2.25" PointY="4.3939925130208337" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

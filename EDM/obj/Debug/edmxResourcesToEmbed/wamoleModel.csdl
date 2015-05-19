@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wamoleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="wamoleEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="CreatePlayer">
+      <Parameter Name="prPlayerName" Mode="In" Type="String" />
+      <Parameter Name="prPlayerPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CreateGameSession">
+      <Parameter Name="prGameID" Mode="In" Type="Int32" />
+      <Parameter Name="prGameName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EndGameSession">
+      <Parameter Name="prGameSessionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="LeaveGameSession">
+      <Parameter Name="prGameSessionID" Mode="In" Type="Int32" />
+      <Parameter Name="prPlayerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="RemovePlayer">
+      <Parameter Name="prPlayerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="games" EntityType="wamoleModel.game" />
+    <EntitySet Name="game_session" EntityType="wamoleModel.game_session" />
+    <EntitySet Name="npcs" EntityType="wamoleModel.npc" />
+    <EntitySet Name="npc_game_session" EntityType="wamoleModel.npc_game_session" />
+    <EntitySet Name="players" EntityType="wamoleModel.player" />
+    <EntitySet Name="player_game_session" EntityType="wamoleModel.player_game_session" />
+    <EntitySet Name="player_score" EntityType="wamoleModel.player_score" />
+    <EntitySet Name="player_session" EntityType="wamoleModel.player_session" />
+    <AssociationSet Name="game_session_ibfk_1" Association="wamoleModel.game_session_ibfk_1">
+      <End Role="game" EntitySet="games" />
+      <End Role="game_session" EntitySet="game_session" />
+    </AssociationSet>
+    <AssociationSet Name="npc_game_session_ibfk_1" Association="wamoleModel.npc_game_session_ibfk_1">
+      <End Role="game_session" EntitySet="game_session" />
+      <End Role="npc_game_session" EntitySet="npc_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="player_game_session_ibfk_1" Association="wamoleModel.player_game_session_ibfk_1">
+      <End Role="game_session" EntitySet="game_session" />
+      <End Role="player_game_session" EntitySet="player_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="npc_game_session_ibfk_2" Association="wamoleModel.npc_game_session_ibfk_2">
+      <End Role="npc" EntitySet="npcs" />
+      <End Role="npc_game_session" EntitySet="npc_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="player_game_session_ibfk_2" Association="wamoleModel.player_game_session_ibfk_2">
+      <End Role="player" EntitySet="players" />
+      <End Role="player_game_session" EntitySet="player_game_session" />
+    </AssociationSet>
+    <AssociationSet Name="player_score_ibfk_1" Association="wamoleModel.player_score_ibfk_1">
+      <End Role="player" EntitySet="players" />
+      <End Role="player_score" EntitySet="player_score" />
+    </AssociationSet>
+    <AssociationSet Name="player_session_ibfk_1" Association="wamoleModel.player_session_ibfk_1">
+      <End Role="player" EntitySet="players" />
+      <End Role="player_session" EntitySet="player_session" />
+    </AssociationSet>
+    <FunctionImport Name="UpdatePlayer">
+      <Parameter Name="prPlayerID" Mode="In" Type="Int32" />
+      <Parameter Name="prPlayerName" Mode="In" Type="String" />
+      <Parameter Name="prPlayerPassword" Mode="In" Type="String" />
+      <Parameter Name="prPlayerLoginAttempts" Mode="In" Type="Int32" />
+      <Parameter Name="prPlayerLocked" Mode="In" Type="SByte" />
+    </FunctionImport>
+    <FunctionImport Name="PlayerLogin">
+      <Parameter Name="prPlayerName" Mode="In" Type="String" />
+      <Parameter Name="prPlayerPassword" Mode="In" Type="String" />
+      <Parameter Name="prResult" Mode="Out" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PlayerLogout">
+      <Parameter Name="prPlayerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="RemoveScores">
+      <Parameter Name="prPlayerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="game">
+    <Key>
+      <PropertyRef Name="Game_ID" />
+    </Key>
+    <Property Name="Game_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Game_Type" Type="Int32" Nullable="false" />
+    <Property Name="Game_TTL" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="game_session" Relationship="wamoleModel.game_session_ibfk_1" FromRole="game" ToRole="game_session" />
+    <Property Name="Game_Name" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="game_session">
+    <Key>
+      <PropertyRef Name="Game_Session_ID" />
+    </Key>
+    <Property Name="Game_Session_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Game_ID" Type="Int32" Nullable="false" />
+    <Property Name="Game_Start_Time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Game_End_Time" Type="DateTime" />
+    <NavigationProperty Name="game" Relationship="wamoleModel.game_session_ibfk_1" FromRole="game_session" ToRole="game" />
+    <NavigationProperty Name="npc_game_session" Relationship="wamoleModel.npc_game_session_ibfk_1" FromRole="game_session" ToRole="npc_game_session" />
+    <NavigationProperty Name="player_game_session" Relationship="wamoleModel.player_game_session_ibfk_1" FromRole="game_session" ToRole="player_game_session" />
+  </EntityType>
+  <EntityType Name="npc">
+    <Key>
+      <PropertyRef Name="NPC_ID" />
+    </Key>
+    <Property Name="NPC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NPC_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NPC_Type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="npc_game_session" Relationship="wamoleModel.npc_game_session_ibfk_2" FromRole="npc" ToRole="npc_game_session" />
+  </EntityType>
+  <EntityType Name="npc_game_session">
+    <Key>
+      <PropertyRef Name="NPC_Game_Session_ID" />
+    </Key>
+    <Property Name="NPC_Game_Session_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Game_Session_ID" Type="Int32" Nullable="false" />
+    <Property Name="NPC_ID" Type="Int32" Nullable="false" />
+    <Property Name="NPC_X" Type="Int32" Nullable="false" />
+    <Property Name="NPC_Y" Type="Int32" Nullable="false" />
+    <Property Name="NPC_Z" Type="Int32" Nullable="false" />
+    <Property Name="NPC_TTL" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="game_session" Relationship="wamoleModel.npc_game_session_ibfk_1" FromRole="npc_game_session" ToRole="game_session" />
+    <NavigationProperty Name="npc" Relationship="wamoleModel.npc_game_session_ibfk_2" FromRole="npc_game_session" ToRole="npc" />
+  </EntityType>
+  <EntityType Name="player">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Player_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Player_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Player_Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Player_Login_Attempts" Type="Int32" Nullable="false" />
+    <Property Name="Player_Locked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="player_game_session" Relationship="wamoleModel.player_game_session_ibfk_2" FromRole="player" ToRole="player_game_session" />
+    <NavigationProperty Name="player_score" Relationship="wamoleModel.player_score_ibfk_1" FromRole="player" ToRole="player_score" />
+    <NavigationProperty Name="player_session" Relationship="wamoleModel.player_session_ibfk_1" FromRole="player" ToRole="player_session" />
+  </EntityType>
+  <EntityType Name="player_game_session">
+    <Key>
+      <PropertyRef Name="Game_Session_ID" />
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Game_Session_ID" Type="Int32" Nullable="false" />
+    <Property Name="Player_ID" Type="Int32" Nullable="false" />
+    <Property Name="Player_X" Type="Int32" Nullable="false" />
+    <Property Name="Player_Y" Type="Int32" Nullable="false" />
+    <Property Name="Player_Hits" Type="Int32" Nullable="false" />
+    <Property Name="Player_Misses" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="game_session" Relationship="wamoleModel.player_game_session_ibfk_1" FromRole="player_game_session" ToRole="game_session" />
+    <NavigationProperty Name="player" Relationship="wamoleModel.player_game_session_ibfk_2" FromRole="player_game_session" ToRole="player" />
+  </EntityType>
+  <EntityType Name="player_score">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Player_ID" Type="Int32" Nullable="false" />
+    <Property Name="Player_Hits" Type="Int32" />
+    <Property Name="Player_Misses" Type="Int32" />
+    <Property Name="Player_Wins" Type="Int32" />
+    <Property Name="Player_Losses" Type="Int32" />
+    <Property Name="Player_Ties" Type="Int32" />
+    <NavigationProperty Name="player" Relationship="wamoleModel.player_score_ibfk_1" FromRole="player_score" ToRole="player" />
+  </EntityType>
+  <EntityType Name="player_session">
+    <Key>
+      <PropertyRef Name="Player_ID" />
+    </Key>
+    <Property Name="Player_ID" Type="Int32" Nullable="false" />
+    <Property Name="Player_Start_Time" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Player_End_Time" Type="DateTime" />
+    <NavigationProperty Name="player" Relationship="wamoleModel.player_session_ibfk_1" FromRole="player_session" ToRole="player" />
+  </EntityType>
+  <Association Name="game_session_ibfk_1">
+    <End Type="wamoleModel.game" Role="game" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="wamoleModel.game_session" Role="game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="Game_ID" />
+      </Principal>
+      <Dependent Role="game_session">
+        <PropertyRef Name="Game_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="npc_game_session_ibfk_1">
+    <End Type="wamoleModel.game_session" Role="game_session" Multiplicity="1" />
+    <End Type="wamoleModel.npc_game_session" Role="npc_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Principal>
+      <Dependent Role="npc_game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_game_session_ibfk_1">
+    <End Type="wamoleModel.game_session" Role="game_session" Multiplicity="1" />
+    <End Type="wamoleModel.player_game_session" Role="player_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Principal>
+      <Dependent Role="player_game_session">
+        <PropertyRef Name="Game_Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="npc_game_session_ibfk_2">
+    <End Type="wamoleModel.npc" Role="npc" Multiplicity="1" />
+    <End Type="wamoleModel.npc_game_session" Role="npc_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="npc">
+        <PropertyRef Name="NPC_ID" />
+      </Principal>
+      <Dependent Role="npc_game_session">
+        <PropertyRef Name="NPC_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_game_session_ibfk_2">
+    <End Type="wamoleModel.player" Role="player" Multiplicity="1" />
+    <End Type="wamoleModel.player_game_session" Role="player_game_session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="Player_ID" />
+      </Principal>
+      <Dependent Role="player_game_session">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_score_ibfk_1">
+    <End Type="wamoleModel.player" Role="player" Multiplicity="1" />
+    <End Type="wamoleModel.player_score" Role="player_score" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="Player_ID" />
+      </Principal>
+      <Dependent Role="player_score">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="player_session_ibfk_1">
+    <End Type="wamoleModel.player" Role="player" Multiplicity="1" />
+    <End Type="wamoleModel.player_session" Role="player_session" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="player">
+        <PropertyRef Name="Player_ID" />
+      </Principal>
+      <Dependent Role="player_session">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
